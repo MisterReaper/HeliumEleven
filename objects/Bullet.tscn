@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dynkewkma2asm"]
+
+[ext_resource type="Script" path="res://objects/Bullet.gd" id="1_aydy2"]
+
+[node name="Bullet" type="RigidBody2D"]
+script = ExtResource("1_aydy2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
