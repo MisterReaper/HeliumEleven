@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk1j0pfy73ps0"]
+
+[ext_resource type="TileSet" uid="uid://cw61dob0b6q6d" path="res://assets/sprites/tileset.tres" id="1_obb1o"]
+[ext_resource type="Script" path="res://map/map_generator.gd" id="2_marjl"]
+
+[node name="World" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_obb1o")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 196608, 6, 1, 196608, 6, 2, 196608, 6, 3, 196608, 6, 4, 196608, 6, 65540, 196608, 6, 131076, 196608, 6, 196612, 196608, 6, 262148, 196608, 6, 262147, 196608, 6, 262146, 196608, 6, 262145, 196608, 6, 262144, 196608, 6, 196608, 196608, 6, 131072, 196608, 6, 65536, 196608, 6)
+script = ExtResource("2_marjl")
