@@ -32,7 +32,7 @@ func getRandomPointInCircle(radius):
 	return [floor(r * cos(theta)), floor(r * sin(theta))]
 
 func setThingy(x,y):
-	set_cell(0, Vector2i(x,y), 0, Vector2i(3,7))
+	set_cell(0, Vector2i(x,y), 0, Vector2i(2,1))
 	
 func deleteThingy(x,y):
 	erase_cell(0, Vector2i(x,y))
