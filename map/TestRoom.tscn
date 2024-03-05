@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://djnupvu7vy1d6"]
+
+[ext_resource type="PackedScene" uid="uid://bqap1xvoy7vdk" path="res://objects/interactables/HoloDiskPlayer.tscn" id="1_irkaw"]
+[ext_resource type="PackedScene" uid="uid://b247abbunvg3c" path="res://objects/Player.tscn" id="2_ppvat"]
+[ext_resource type="PackedScene" uid="uid://dwwojxylfcv7m" path="res://objects/enemies/Rotater.tscn" id="3_hb0da"]
+[ext_resource type="PackedScene" uid="uid://b5fk82nm6u4q8" path="res://objects/enemies/Straightman.tscn" id="4_icnhc"]
+
+[node name="TestRoom" type="Node2D"]
+
+[node name="HoloDiskPlayer" parent="." instance=ExtResource("1_irkaw")]
+position = Vector2(199, 91)
+
+[node name="player" parent="." instance=ExtResource("2_ppvat")]
+position = Vector2(49, 35)
+
+[node name="Rotater" parent="." instance=ExtResource("3_hb0da")]
+position = Vector2(842, 381)
+
+[node name="Straightman" parent="." instance=ExtResource("4_icnhc")]
+position = Vector2(845, 272)

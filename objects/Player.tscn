@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://b247abbunvg3c"]
+
+[ext_resource type="Script" path="res://objects/Player.gd" id="1_xks8h"]
+[ext_resource type="Script" path="res://resources/StatBlock.gd" id="2_peq4i"]
+[ext_resource type="Script" path="res://resources/BulletStats.gd" id="3_2wph1"]
+[ext_resource type="PackedScene" uid="uid://dynkewkma2asm" path="res://objects/Bullet.tscn" id="3_5x5ve"]
+[ext_resource type="Texture2D" uid="uid://d8la44w50qyd" path="res://assets/sprites/bullet.png" id="4_gwqc0"]
+
+[sub_resource type="Resource" id="Resource_yf50s"]
+script = ExtResource("2_peq4i")
+movespeed = 300
+health = 50
+
+[sub_resource type="Resource" id="Resource_udatj"]
+script = ExtResource("3_2wph1")
+bulletSizeMultiplikator = 0.5
+bulletSpeed = 300
+reloadTime = 1.0
+gunPorts = 2
+bullet = ExtResource("3_5x5ve")
+pattern = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txw4q"]
+size = Vector2(99, 49)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5rb0"]
+radius = 75.1665
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_xks8h")
+playerStat = SubResource("Resource_yf50s")
+bulletStats = SubResource("Resource_udatj")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="hitCollision" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_txw4q")
+
+[node name="interactionBox" type="Area2D" parent="."]
+
+[node name="interactionCollision" type="CollisionShape2D" parent="interactionBox"]
+shape = SubResource("CircleShape2D_r5rb0")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.152941, 1, 1, 1)
+texture = ExtResource("4_gwqc0")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
