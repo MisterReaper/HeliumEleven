@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5fk82nm6u4q8"]
+
+[ext_resource type="PackedScene" uid="uid://cyapqhfq31u1" path="res://objects/enemies/Enemy.tscn" id="1_wc7ic"]
+[ext_resource type="Texture2D" uid="uid://d8la44w50qyd" path="res://assets/sprites/bullet.png" id="2_awom4"]
+
+[node name="Straightman" instance=ExtResource("1_wc7ic")]
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color(1, 1, 0.282353, 1)
+texture = ExtResource("2_awom4")
