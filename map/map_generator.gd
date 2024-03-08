@@ -78,7 +78,14 @@ func _draw():
 		for data in old_data:
 			deleteThingy(data.x, data.y)
 		old_data.clear()
+		calculateNeighbors()
 		drawMap()
+		
+
+func calculateNeighbors():
+	for roomOrigin in map_data:
+		roomOrigin.checkBorders(map_data)
+				
 		
 
 func _process(delta):
