@@ -1,9 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5fk82nm6u4q8"]
+[gd_scene load_steps=9 format=3 uid="uid://b5fk82nm6u4q8"]
 
 [ext_resource type="PackedScene" uid="uid://cyapqhfq31u1" path="res://objects/enemies/Enemy.tscn" id="1_wc7ic"]
+[ext_resource type="Script" path="res://objects/enemies/Straightman.gd" id="2_14lip"]
 [ext_resource type="Texture2D" uid="uid://d8la44w50qyd" path="res://assets/sprites/bullet.png" id="2_awom4"]
+[ext_resource type="Script" path="res://resources/StatBlock.gd" id="3_42t2h"]
+[ext_resource type="PackedScene" uid="uid://dynkewkma2asm" path="res://objects/Bullet.tscn" id="3_xv8ct"]
+[ext_resource type="Script" path="res://resources/BulletStats.gd" id="4_ubfds"]
+
+[sub_resource type="Resource" id="Resource_1phfy"]
+script = ExtResource("3_42t2h")
+movespeed = 20
+health = 2
+
+[sub_resource type="Resource" id="Resource_cwiuq"]
+script = ExtResource("4_ubfds")
+bulletSizeMultiplikator = 0.5
+bulletSpeed = 200
+reloadTime = 1.0
+gunPorts = 0
+bullet = ExtResource("3_xv8ct")
+damage = 2
+pattern = 0
 
 [node name="Straightman" instance=ExtResource("1_wc7ic")]
+script = ExtResource("2_14lip")
+playerStat = SubResource("Resource_1phfy")
+bulletStats = SubResource("Resource_cwiuq")
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color(1, 1, 0.282353, 1)

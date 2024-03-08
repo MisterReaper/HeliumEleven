@@ -3,14 +3,20 @@
 [ext_resource type="Script" path="res://objects/Bullet.gd" id="1_aydy2"]
 [ext_resource type="Texture2D" uid="uid://d8la44w50qyd" path="res://assets/sprites/bullet.png" id="2_v6inu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca3vg"]
-size = Vector2(2, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgh6l"]
+size = Vector2(100, 50)
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="Node2D"]
 script = ExtResource("1_aydy2")
 
-[node name="BulletCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ca3vg")
-
 [node name="BulletSprite" type="Sprite2D" parent="."]
+position = Vector2(-4, -2)
 texture = ExtResource("2_v6inu")
+
+[node name="BulletCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletCollision"]
+position = Vector2(-4, -2)
+shape = SubResource("RectangleShape2D_cgh6l")
+
+[connection signal="area_entered" from="BulletCollision" to="." method="_on_bullet_collision_area_entered"]

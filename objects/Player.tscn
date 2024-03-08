@@ -1,15 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://b247abbunvg3c"]
+[gd_scene load_steps=11 format=3 uid="uid://b247abbunvg3c"]
 
 [ext_resource type="Script" path="res://objects/Player.gd" id="1_xks8h"]
 [ext_resource type="Script" path="res://resources/StatBlock.gd" id="2_peq4i"]
 [ext_resource type="Script" path="res://resources/BulletStats.gd" id="3_2wph1"]
 [ext_resource type="PackedScene" uid="uid://dynkewkma2asm" path="res://objects/Bullet.tscn" id="3_5x5ve"]
 [ext_resource type="Texture2D" uid="uid://d8la44w50qyd" path="res://assets/sprites/bullet.png" id="4_gwqc0"]
+[ext_resource type="PackedScene" uid="uid://x1aredb35g7b" path="res://objects/Hitbox.tscn" id="5_jqn2b"]
 
 [sub_resource type="Resource" id="Resource_yf50s"]
 script = ExtResource("2_peq4i")
-movespeed = 300
-health = 50
+movespeed = 200
+health = 10
 
 [sub_resource type="Resource" id="Resource_udatj"]
 script = ExtResource("3_2wph1")
@@ -18,10 +19,10 @@ bulletSpeed = 300
 reloadTime = 1.0
 gunPorts = 2
 bullet = ExtResource("3_5x5ve")
-pattern = 1
+damage = 1
+pattern = 0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_txw4q"]
-size = Vector2(99, 49)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4n3h7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r5rb0"]
 radius = 75.1665
@@ -31,11 +32,11 @@ script = ExtResource("1_xks8h")
 playerStat = SubResource("Resource_yf50s")
 bulletStats = SubResource("Resource_udatj")
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="worldCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4n3h7")
+debug_color = Color(0.560784, 0.552941, 0.27451, 0.419608)
 
-[node name="hitCollision" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_txw4q")
+[node name="Hitbox" parent="." instance=ExtResource("5_jqn2b")]
 
 [node name="interactionBox" type="Area2D" parent="."]
 
@@ -48,3 +49,7 @@ texture = ExtResource("4_gwqc0")
 
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+
+[editable path="Hitbox"]

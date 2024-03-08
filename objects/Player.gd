@@ -21,8 +21,6 @@ func handleInput():
 			fire()
 			timer.wait_time = bulletStats.reloadTime
 			timer.start()
-		else:
-			print_debug("Waiting "+ str(timer.time_left))
 		
 	var moveDirection = Input.get_vector("ui_left", "ui_right", "ui_up","ui_down")
 	velocity = moveDirection * playerStat.movespeed
@@ -46,4 +44,15 @@ func contextAction():
 			area.get_parent().interact()
 
 func fire():
-	bulletStats.shoot(get_tree().get_root(), get_global_position(), rotation_degrees)
+	bulletStats.shoot(get_tree().get_root(), get_global_position(), rotation_degrees, true)
+
+
+func _on_hitbox_area_entered(area):
+	#playerStat.health = playerStat.health - area.get_parent().damage
+	print_debug(area.name)
+	if(area.name == "BulletCollision" and !area.get_parent().sourcePlayer):
+		playerStat.health -= area.get_parent().damage
+		area.get_parent().queue_free()
+		print_debug(str(playerStat.health))
+		if(playerStat.health <= 0):
+			self.queue_free()

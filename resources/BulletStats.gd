@@ -6,6 +6,7 @@ class_name BulletStats
 @export var reloadTime: float
 @export var gunPorts: int
 @export var bullet = preload("res://objects/Bullet.tscn")
+@export var damage: int
 @export var pattern: patterns
 enum patterns {STRAIGHT_SHOT, V_SHOT, SINUS_BLAST, ROTATION, NONE}
 
@@ -17,44 +18,49 @@ func _ready():
 func _process(delta):
 	pass
 
-func shoot(root_node, position, rotation_degrees):
+func shoot(root_node, position, rotation_degrees, source = false):
 	match pattern:
 		patterns.STRAIGHT_SHOT:
-			print_debug("PEW "+ str(position)+" "+ str(rotation_degrees))
 			var bulletInstance = bullet.instantiate()
 			bulletInstance.position = position
 			bulletInstance.rotation_degrees = rotation_degrees
 			bulletInstance.get_node("BulletCollision").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
 			bulletInstance.get_node("BulletSprite").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
-			bulletInstance.apply_impulse(Vector2(bulletSpeed,0).rotated(deg_to_rad(rotation_degrees)), Vector2(0,0))
+			bulletInstance.speed = bulletSpeed
+			bulletInstance.damage = damage
+			bulletInstance.sourcePlayer = source
 			root_node.add_child(bulletInstance)
 			
 		patterns.V_SHOT:
-			print_debug("V-SHOT, V-SHOT, "+str(rotation_degrees))
 			var bulletInstance1 = bullet.instantiate()
 			var bulletInstance2 = bullet.instantiate()
 			bulletInstance1.position = position
 			bulletInstance1.rotation_degrees = rotation_degrees+450
-			bulletInstance1.apply_impulse(Vector2(bulletSpeed, 0).rotated(deg_to_rad(rotation_degrees+30)), Vector2(0,0))
+			bulletInstance1.speed = bulletSpeed
+			bulletInstance1.damage = damage
+			bulletInstance1.sourcePlayer = source
 			bulletInstance1.get_node("BulletCollision").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
 			bulletInstance1.get_node("BulletSprite").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
 			bulletInstance2.position = position
 			bulletInstance2.rotation_degrees = rotation_degrees-450
-			bulletInstance2.apply_impulse(Vector2(bulletSpeed, 0).rotated(deg_to_rad(rotation_degrees-30)), Vector2(0,0))
+			bulletInstance2.speed = bulletSpeed
+			bulletInstance2.damage = damage
+			bulletInstance2.sourcePlayer = source
 			bulletInstance2.get_node("BulletCollision").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
 			bulletInstance2.get_node("BulletSprite").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
 			root_node.add_child(bulletInstance1)
 			root_node.add_child(bulletInstance2)
 			
 		patterns.ROTATION:
-			print_debug("ROTATION, A FLOWER ON THE BATTLE FIELD!")
-			var step = 360 / gunPorts
-			for i in range(gunPorts):
-				var bulletInstance = bullet.instantiate()
-				bulletInstance.position = position
-				bulletInstance.rotation_degrees = rotation_degrees+(step*i)
-				bulletInstance.apply_impulse(Vector2(bulletSpeed, 0).rotated(deg_to_rad(rotation_degrees+(step*i))), Vector2(0,0))
-				bulletInstance.get_node("BulletCollision").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
-				bulletInstance.get_node("BulletSprite").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
-				root_node.add_child(bulletInstance)
-				print_debug("Fired Gunport "+ str(i)+ " at RD: "+ str(deg_to_rad(bulletInstance.rotation_degrees)))
+			if gunPorts != 0:
+				var step = 360 / gunPorts
+				for i in range(gunPorts):
+					var bulletInstance = bullet.instantiate()
+					bulletInstance.position = position
+					bulletInstance.rotation_degrees = rotation_degrees+(step*i)
+					bulletInstance.speed = bulletSpeed
+					bulletInstance.damage = damage
+					bulletInstance.sourcePlayer = source
+					bulletInstance.get_node("BulletCollision").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
+					bulletInstance.get_node("BulletSprite").scale = Vector2(bulletSizeMultiplikator,bulletSizeMultiplikator)
+					root_node.add_child(bulletInstance)
