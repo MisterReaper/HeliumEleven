@@ -7,7 +7,7 @@
 position = Vector2(32, 32)
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(-1288, -336)
+position = Vector2(-2, 34)
 tile_set = ExtResource("1_obb1o")
 format = 2
 layer_0/name = "Wall"
