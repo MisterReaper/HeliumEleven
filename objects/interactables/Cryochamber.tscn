@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://o272qv763lse"]
+
+[ext_resource type="Texture2D" uid="uid://clo0tx3n6smmv" path="res://assets/sprites/objects/cryo.png" id="1_lanv3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnfbl"]
+atlas = ExtResource("1_lanv3")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03uon"]
+atlas = ExtResource("1_lanv3")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rbtr"]
+atlas = ExtResource("1_lanv3")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hvne"]
+atlas = ExtResource("1_lanv3")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id1wm"]
+atlas = ExtResource("1_lanv3")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bixm7"]
+atlas = ExtResource("1_lanv3")
+region = Rect2(160, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ei4ty"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnfbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03uon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rbtr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hvne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id1wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bixm7")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[node name="Cryochamber" type="Node2D"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ei4ty")
+animation = &"open"
+offset = Vector2(0, -24)
