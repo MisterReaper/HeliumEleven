@@ -7,14 +7,15 @@ var collShape
 var roomWidth
 var roomHeight
 var neighbor = []
-var topLeftNeighbor
-var topRightNeighbor
-var rightTopNeighbor
-var rightDownNeighbor
-var downLeftNeighbor
-var downRightNeighbor
-var leftDownNeighbor
-var leftTopNeighbor
+var topLeftNeighbor = null
+var topRightNeighbor = null 
+var rightTopNeighbor = null
+var rightDownNeighbor = null
+var downLeftNeighbor = null
+var downRightNeighbor = null
+var leftDownNeighbor = null
+var leftTopNeighbor = null
+var camera
 
 func _init(startPos, scene, template, width, height):
 	roomWidth = width
@@ -27,6 +28,8 @@ func _init(startPos, scene, template, width, height):
 	var recShape = RectangleShape2D.new()
 	collShape.shape = recShape
 	collShape.shape.extents = Vector2(roomWidth/2,roomHeight/2)
+	camera = Camera2D.new()
+	camera.anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
 
 
 func isOverlapping():
@@ -38,8 +41,11 @@ func isOverlapping():
 func drawRoom(root_node):
 	var roomInstance = template.instantiate()
 	roomInstance.position.x = roundi(position.x) *16
-	roomInstance.position.y = roundi(position.y) *16
+	roomInstance.position.y = roundi(position.y) *16 
 	root_node.add_child(roomInstance)
+	
+	roomInstance.add_child(camera)
+	camera.position.y += 1
 
 func checkBorders(possibleAdjecentRooms):
 	var startPos = Vector2.ZERO

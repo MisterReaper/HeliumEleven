@@ -7,12 +7,14 @@ var widthRoom = 22
 var heightRoom = 14
 var bossRoomSize = 15
 var numBossRooms = 5
-var desired_separation = 26
+var desired_separation = 27
 var map_data = []  # Stores generated map information (e.g., room positions, shapes)
 var accumulated_force = Vector2.ZERO
 var old_data = []
 var roomsGenerated = 0
 var processRan = false
+var alreadyDrawn = false
+var roomCamera
 
 	
 func _ready():
@@ -51,7 +53,6 @@ func drawMap():
 	for room in map_data:
 		if room.isOverlapping():
 			canDraw = false
-	print(canDraw)
 	for room in map_data:
 		if canDraw:
 			room.drawRoom(get_parent())
@@ -75,20 +76,66 @@ func _draw():
 					old_data.append(Vector2(x+room.position.x-(room.roomWidth/2), y+room.position.y-(room.roomHeight/2)))
 					setThingy(x+room.position.x-(room.roomWidth/2), y+room.position.y-(room.roomHeight/2))
 	else:
-		for data in old_data:
-			deleteThingy(data.x, data.y)
-		old_data.clear()
-		calculateNeighbors()
-		drawMap()
+		if alreadyDrawn == false:
+			for data in old_data:
+				deleteThingy(data.x, data.y)
+			old_data.clear()
+			calculateNeighbors()
+			calculateStartAndEndRoom()
+			drawMap()
+			alreadyDrawn = true
 		
+		
+		
+func drawSingleRoom(room):
+	room.drawRoom(get_parent())
 
 func calculateNeighbors():
 	for roomOrigin in map_data:
 		roomOrigin.checkBorders(map_data)
 				
-		
+
+func calculateStartAndEndRoom():
+	var visitedNeighbors = []
+	var stillLookingForStartRoom = true
+	var start
+	while stillLookingForStartRoom:
+		start = randi() % map_data.size()
+		visitedNeighbors = calculatePossiblePath(map_data[start], visitedNeighbors)
+		if visitedNeighbors.size() > 3:
+			stillLookingForStartRoom = false
+	var end = randi() % map_data.size()
+	while end == start:
+		end = randi() % map_data.size()
+	var boss = randi() % map_data.size()
+	while boss == start:
+		boss = randi() % map_data.size()
+	roomCamera = map_data[start].camera
+	#drawSingleRoom(map_data[start])
+
+func calculatePossiblePath(startRoom, visited):
+	visited.append(startRoom)
+	if startRoom.topRightNeighbor != null && startRoom.topRightNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.topRightNeighbor, visited)
+	if startRoom.topLeftNeighbor != null && startRoom.topLeftNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.topLeftNeighbor, visited)
+	if startRoom.rightTopNeighbor != null && startRoom.rightTopNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.rightTopNeighbor, visited)
+	if startRoom.rightDownNeighbor != null && startRoom.rightDownNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.rightDownNeighbor, visited)
+	if startRoom.downRightNeighbor != null && startRoom.downRightNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.downRightNeighbor, visited)
+	if startRoom.downLeftNeighbor != null && startRoom.downLeftNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.downLeftNeighbor, visited)
+	if startRoom.leftDownNeighbor != null && startRoom.leftDownNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.leftDownNeighbor, visited)
+	if startRoom.leftTopNeighbor != null && startRoom.leftTopNeighbor not in visited:
+		visited = calculatePossiblePath(startRoom.leftTopNeighbor, visited)
+	return visited
 
 func _process(delta):
+	if alreadyDrawn == false:
+		_draw()
 	processRan = true
 	for room in map_data:
 		accumulated_force = Vector2.ZERO
