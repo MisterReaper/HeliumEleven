@@ -92,7 +92,6 @@ func checkBorders(possibleAdjecentRooms):
 		
 func setFocus():
 	camera.make_current()
-	print(camera.enabled)
 	
 
 func isInside(checkPosition):
