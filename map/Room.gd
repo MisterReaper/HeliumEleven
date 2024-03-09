@@ -21,7 +21,7 @@ func _init(startPos, scene, template, width, height):
 	roomWidth = width
 	roomHeight = height
 	position = startPos
-	self.template = preload("res://map/roomTemplates/room1.tscn")
+	self.template = preload("res://map/roomTemplates/room2.tscn")
 	scene.add_child(self)
 	collShape = CollisionShape2D.new()
 	add_child(collShape)
@@ -90,5 +90,10 @@ func checkBorders(possibleAdjecentRooms):
 				if leftDownNeighbor != null && possibleRoom != leftDownNeighbor && leftTopNeighbor == null:
 					leftTopNeighbor = possibleRoom
 		
+func setFocus():
+	camera.make_current()
+	print(camera.enabled)
+	
+
 func isInside(checkPosition):
 	return (position.x - roomWidth/2) <= checkPosition.x && (position.x + roomWidth/2) >= checkPosition.x && (position.y - roomHeight/2) <= checkPosition.y && (position.y + roomHeight/2) >= checkPosition.y
