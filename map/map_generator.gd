@@ -116,7 +116,8 @@ func calculateStartAndEndRoom():
 	while boss == start:
 		boss = randi() % map_data.size()
 	roomCamera = map_data[start].camera
-	player.position = map_data[start].position*16
+	player.position.x = map_data[start].position.x*16+11*16
+	player.position.y = map_data[start].position.y*16+7*16
 	map_data[start].template = preload("res://map/roomTemplates/room1.tscn")
 	
 
