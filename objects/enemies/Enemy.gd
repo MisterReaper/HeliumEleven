@@ -18,7 +18,7 @@ func _on_shoot_timer_timeout():
 	if playerStat.health <= 0:
 		self.queue_free()
 	print_debug("Enemy Fire!")
-	bulletStats.shoot(get_tree().get_root(), get_global_position(), rotation_degrees)
+	bulletStats.shoot(get_tree().get_root().get_child(0), get_global_position(), rotation_degrees)
 
 
 func _on_hitbox_area_entered(area):

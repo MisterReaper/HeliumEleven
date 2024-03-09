@@ -5,7 +5,8 @@ class_name  Player
 @export var playerStat:StatBlock
 @export var bulletStats:BulletStats
 @onready var interactionBox = $interactionBox
-@onready var timer = $ReloadTimer
+@onready var reloadTimer = $ReloadTimer
+@onready var delayTimer = $DelayTimer
 var direction
 
 func _physics_process(delta):
@@ -17,11 +18,17 @@ func handleInput():
 		contextAction()
 	
 	if Input.is_key_pressed(KEY_SPACE):
-		if timer.time_left == 0:
+		if reloadTimer.time_left == 0:
 			fire()
-			timer.wait_time = bulletStats.reloadTime
-			timer.start()
-		
+			reloadTimer.wait_time = bulletStats.reloadTime
+			reloadTimer.start()
+	
+	if Input.is_key_pressed(KEY_P) and delayTimer.is_stopped():
+		var pause_menu = load("res://menu/pause_menu.tscn")
+		var instance = pause_menu.instantiate()
+		get_tree().get_root().add_child(instance)
+		delayTimer.start()
+			
 	var moveDirection = Input.get_vector("ui_left", "ui_right", "ui_up","ui_down")
 	velocity = moveDirection * playerStat.movespeed
 	if moveDirection.length():
@@ -44,7 +51,7 @@ func contextAction():
 			area.get_parent().interact()
 
 func fire():
-	bulletStats.shoot(get_tree().get_root(), get_global_position(), rotation_degrees, true)
+	bulletStats.shoot(get_tree().get_root().get_child(0), get_global_position(), rotation_degrees, true)
 
 
 func _on_hitbox_area_entered(area):
@@ -55,4 +62,7 @@ func _on_hitbox_area_entered(area):
 		area.get_parent().queue_free()
 		print_debug(str(playerStat.health))
 		if(playerStat.health <= 0):
+			var death_menu = load("res://objects/interface/DeathOverlay.tscn")
+			var death_menu_instance = death_menu.instantiate()
+			get_tree().get_root().get_child(0).add_child(death_menu_instance)
 			self.queue_free()

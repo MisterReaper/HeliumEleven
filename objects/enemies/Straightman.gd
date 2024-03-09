@@ -7,4 +7,4 @@ func _ready():
 	shootTimer.start()
 
 func _on_shoot_timer_timeout():
-	bulletStats.shoot(get_tree().get_root(), get_global_position(), rotation_degrees)
+	bulletStats.shoot(get_tree().get_root().get_child(0), get_global_position(), rotation_degrees)

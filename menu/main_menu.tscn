@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs6xn15wcvexe"]
+
+[ext_resource type="Script" path="res://menu/main_menu.gd" id="1_jhun6"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jhun6")
+
+[node name="BackgroundMainMenu" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 585.0
+theme_override_constants/separation = 100
+
+[node name="Seperator2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Titel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "HE-11"
+horizontal_alignment = 1
+
+[node name="Seperator" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AnyKeyLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Press any Key"
+horizontal_alignment = 1
+vertical_alignment = 2

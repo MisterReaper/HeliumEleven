@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cyapqhfq31u1" path="res://objects/enemies/Enemy.tscn" id="1_wc7ic"]
 [ext_resource type="Script" path="res://objects/enemies/Straightman.gd" id="2_14lip"]
-[ext_resource type="Texture2D" uid="uid://d8la44w50qyd" path="res://assets/sprites/bullet.png" id="2_awom4"]
+[ext_resource type="Texture2D" uid="uid://dbsjpmwr32wvm" path="res://assets/sprites/bullet.png" id="2_awom4"]
 [ext_resource type="Script" path="res://resources/StatBlock.gd" id="3_42t2h"]
 [ext_resource type="PackedScene" uid="uid://dynkewkma2asm" path="res://objects/Bullet.tscn" id="3_xv8ct"]
 [ext_resource type="Script" path="res://resources/BulletStats.gd" id="4_ubfds"]

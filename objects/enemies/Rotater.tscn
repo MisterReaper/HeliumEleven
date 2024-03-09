@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://resources/StatBlock.gd" id="3_l31cw"]
 [ext_resource type="PackedScene" uid="uid://dynkewkma2asm" path="res://objects/Bullet.tscn" id="3_rh8j3"]
 [ext_resource type="Script" path="res://resources/BulletStats.gd" id="4_1lwcw"]
-[ext_resource type="Texture2D" uid="uid://d8la44w50qyd" path="res://assets/sprites/bullet.png" id="5_a3qnr"]
+[ext_resource type="Texture2D" uid="uid://dbsjpmwr32wvm" path="res://assets/sprites/bullet.png" id="5_a3qnr"]
 
 [sub_resource type="Resource" id="Resource_rcux6"]
 script = ExtResource("3_l31cw")
@@ -17,10 +17,10 @@ script = ExtResource("4_1lwcw")
 bulletSizeMultiplikator = 1.0
 bulletSpeed = 200
 reloadTime = 0.6
-gunPorts = 2
+gunPorts = 3
 bullet = ExtResource("3_rh8j3")
 damage = 1
-pattern = 0
+pattern = 3
 
 [node name="Rotater" instance=ExtResource("1_b5nbk")]
 script = ExtResource("2_itiov")
