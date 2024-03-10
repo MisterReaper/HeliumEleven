@@ -15,10 +15,15 @@ var roomsGenerated = 0
 var processRan = false
 var alreadyDrawn = false
 var roomCamera
+var player
+var start
+var boss
+var end
 
 	
 func _ready():
 	generate_map()
+	player = get_node("../player")
 
 func generate_map():
 #	for i in range(0, numBossRooms):
@@ -84,6 +89,7 @@ func _draw():
 			calculateStartAndEndRoom()
 			drawMap()
 			alreadyDrawn = true
+			map_data[start].setFocus()
 		
 		
 		
@@ -98,20 +104,22 @@ func calculateNeighbors():
 func calculateStartAndEndRoom():
 	var visitedNeighbors = []
 	var stillLookingForStartRoom = true
-	var start
 	while stillLookingForStartRoom:
 		start = randi() % map_data.size()
 		visitedNeighbors = calculatePossiblePath(map_data[start], visitedNeighbors)
 		if visitedNeighbors.size() > 3:
 			stillLookingForStartRoom = false
-	var end = randi() % map_data.size()
+	end = randi() % map_data.size()
 	while end == start:
 		end = randi() % map_data.size()
-	var boss = randi() % map_data.size()
+	boss = randi() % map_data.size()
 	while boss == start:
 		boss = randi() % map_data.size()
 	roomCamera = map_data[start].camera
-	#drawSingleRoom(map_data[start])
+	player.position.x = map_data[start].position.x*16+11*16
+	player.position.y = map_data[start].position.y*16+7*16
+	map_data[start].template = preload("res://map/roomTemplates/room1.tscn")
+	
 
 func calculatePossiblePath(startRoom, visited):
 	visited.append(startRoom)

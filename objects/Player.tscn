@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://resources/BulletStats.gd" id="3_2wph1"]
 [ext_resource type="PackedScene" uid="uid://dynkewkma2asm" path="res://objects/Bullet.tscn" id="3_5x5ve"]
 [ext_resource type="Texture2D" uid="uid://dbsjpmwr32wvm" path="res://assets/sprites/bullet.png" id="4_gwqc0"]
-[ext_resource type="PackedScene" uid="uid://x1aredb35g7b" path="res://objects/Hitbox.tscn" id="5_jqn2b"]
+[ext_resource type="PackedScene" path="res://objects/Hitbox.tscn" id="5_jqn2b"]
 
 [sub_resource type="Resource" id="Resource_yf50s"]
 script = ExtResource("2_peq4i")
@@ -28,6 +28,7 @@ pattern = 0
 radius = 75.1665
 
 [node name="player" type="CharacterBody2D"]
+z_index = 99
 script = ExtResource("1_xks8h")
 playerStat = SubResource("Resource_yf50s")
 bulletStats = SubResource("Resource_udatj")
